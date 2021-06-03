@@ -34,4 +34,4 @@ Developed new network attendance system using MySQL and ASP.
 - The University of Illinois, Urbana-Champaign, IL — BA, 2001
 
 ### Skills
-Deeply knowledgeable about technology and software. Agile Software Development, Product Owner, Product Management, VersionOne, Jira, App Dynamics, Web production, HTML, CSS, SharePoint, Adobe CQ, CMS, Google Analytics, and Adobe Creative Suite/Creative Cloud.
+*Deeply knowledgeable about technology and software. Agile Software Development, Product Owner, Product Management, VersionOne, Jira, App Dynamics, Web production, HTML, CSS, SharePoint, Adobe CQ, CMS, Google Analytics, and Adobe Creative Suite/Creative Cloud.*
