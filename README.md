@@ -3,13 +3,13 @@
 ### Product Owner - Digital Strategy, U.S. Bank — 2014-Present 
 Leads the product vision, development, roadmap, and strategy for high-profile, client-facing web and mobile applications for clients in the finance and investment services industry with a focus on delivering data-intensive applications like hypothetical trades, analytics, entitlement and reporting systems, and deal data comparison tools.
 
-Responsible for the delivery of native mobile application that significantly increased the performance and improved the user experience over the previous mobile solution.  
+- Responsible for the delivery of native mobile application that significantly increased the performance and improved the user experience over the previous mobile solution.  
 
-Provides strategic leadership and guidance to cross-functional teams of designers, developers, business analysts, and stakeholders to deliver industry-leading features, user experience, and designs delivered within an agile framework focused on the continuous delivery of incremental improvements that deliver the greatest value to clients and stakeholders. 
+- Provides strategic leadership and guidance to cross-functional teams of designers, developers, business analysts, and stakeholders to deliver industry-leading features, user experience, and designs delivered within an agile framework focused on the continuous delivery of incremental improvements that deliver the greatest value to clients and stakeholders. 
 
-Sets priorities for development to ensure that the most important, impactful features are delivered first. 
+- Sets priorities and for development to ensure that the most important, impactful features are delivered first. 
 
-Effectively communicates to stakeholders and team members with varying levels of technical expertise.  
+- Effectively communicates to stakeholders and team members with varying levels of technical expertise.  
 
 ### Digital Communications Manager, American Bar Association — 2011-2014
 Developed and published division’s web, eBooks, and tablet magazines.
