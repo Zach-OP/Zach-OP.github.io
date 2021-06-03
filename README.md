@@ -7,7 +7,7 @@ Responsible for the delivery of native mobile application that significantly inc
 
 Provides strategic leadership and guidance to cross-functional teams of designers, developers, business analysts, and stakeholders to deliver industry-leading features, user experience, and designs delivered within an agile framework focused on the continuous delivery of incremental improvements that deliver the greatest value to clients and stakeholders. 
 
-Sets priorities and for development to ensure that the most important, impactful features are delivered first. 
+Sets priorities for development to ensure that the most important, impactful features are delivered first. 
 
 Effectively communicates to stakeholders and team members with varying levels of technical expertise.  
 
