@@ -30,8 +30,8 @@ Designed and implemented network changes and modernization for a large school di
 Developed new network attendance system using MySQL and ASP.
 
 ## Education
-Northwestern University, Evanston, IL — MSJ, 2011
-The University of Illinois, Urbana-Champaign, IL — BA, 2001
+- Northwestern University, Evanston, IL — MSJ, 2011
+- The University of Illinois, Urbana-Champaign, IL — BA, 2001
 
 ### Skills
 Deeply knowledgeable about technology and software. Agile Software Development, Product Owner, Product Management, VersionOne, Jira, App Dynamics, Web production, HTML, CSS, SharePoint, Adobe CQ, CMS, Google Analytics, and Adobe Creative Suite/Creative Cloud.
