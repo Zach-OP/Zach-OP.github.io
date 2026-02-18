@@ -1,0 +1,92 @@
+# ASCIIboard — XcodeGen project spec
+# Run `make generate` (or `xcodegen generate`) to produce ASCIIboard.xcodeproj
+
+name: ASCIIboard
+
+options:
+  bundleIdPrefix: io.github.zachop
+  deploymentTarget:
+    iOS: "16.0"
+  xcodeVersion: "15.4"
+  generateEmptyDirectories: true
+  createIntermediateGroups: true
+
+settings:
+  base:
+    SWIFT_VERSION: "5.10"
+    IPHONEOS_DEPLOYMENT_TARGET: "16.0"
+    TARGETED_DEVICE_FAMILY: "1,2"
+    ENABLE_BITCODE: NO
+    DEBUG_INFORMATION_FORMAT: dwarf-with-dsym
+
+# --------------------------------------------------------------------------- #
+# Targets
+# --------------------------------------------------------------------------- #
+
+targets:
+
+  # ── Main application ─────────────────────────────────────────────────────
+
+  ASCIIboard:
+    type: application
+    platform: iOS
+    deploymentTarget: "16.0"
+
+    sources:
+      - path: ASCIIboard        # Main app sources
+        createIntermediateGroups: true
+      - path: Shared            # Shared models & library (compiled into both targets)
+        createIntermediateGroups: true
+
+    settings:
+      base:
+        PRODUCT_BUNDLE_IDENTIFIER: io.github.zachop.asciboard
+        INFOPLIST_FILE: ASCIIboard/Info.plist
+        PRODUCT_NAME: ASCIIboard
+        CODE_SIGN_STYLE: Automatic
+        # App Group for sharing favorites with the keyboard extension
+        # Add entitlement "com.apple.security.application-groups" in Signing & Capabilities.
+
+    dependencies:
+      - target: ASCIIboardKeyboard
+        embed: true
+
+  # ── Keyboard Extension ───────────────────────────────────────────────────
+
+  ASCIIboardKeyboard:
+    type: app-extension
+    platform: iOS
+    deploymentTarget: "16.0"
+
+    sources:
+      - path: ASCIIboardKeyboard   # Extension-specific sources
+        createIntermediateGroups: true
+      - path: Shared               # Shared models & library
+        createIntermediateGroups: true
+
+    settings:
+      base:
+        PRODUCT_BUNDLE_IDENTIFIER: io.github.zachop.asciboard.keyboard
+        INFOPLIST_FILE: ASCIIboardKeyboard/Info.plist
+        PRODUCT_NAME: ASCIIboardKeyboard
+        CODE_SIGN_STYLE: Automatic
+        # The extension must be embedded in — and share the same App Group as — the main app.
+
+# --------------------------------------------------------------------------- #
+# Schemes
+# --------------------------------------------------------------------------- #
+
+schemes:
+  ASCIIboard:
+    build:
+      targets:
+        ASCIIboard: all
+        ASCIIboardKeyboard: all
+    run:
+      config: Debug
+    test:
+      config: Debug
+    profile:
+      config: Release
+    archive:
+      config: Release
