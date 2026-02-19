@@ -44,6 +44,9 @@ targets:
         INFOPLIST_FILE: ASCIIboard/Info.plist
         PRODUCT_NAME: ASCIIboard
         CODE_SIGN_STYLE: Automatic
+        # Asset catalog — icon & accent color
+        ASSETCATALOG_COMPILER_APPICON_NAME: AppIcon
+        ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME: AccentColor
         # App Group for sharing favorites with the keyboard extension
         # Add entitlement "com.apple.security.application-groups" in Signing & Capabilities.
 

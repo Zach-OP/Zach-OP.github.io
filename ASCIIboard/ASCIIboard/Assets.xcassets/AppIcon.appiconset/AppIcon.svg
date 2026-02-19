@@ -1,0 +1,131 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024" width="1024" height="1024">
+  <defs>
+    <!-- Background gradient: dark charcoal with a subtle depth -->
+    <radialGradient id="bg" cx="50%" cy="40%" r="70%">
+      <stop offset="0%"   stop-color="#2C2C2E"/>
+      <stop offset="100%" stop-color="#111113"/>
+    </radialGradient>
+
+    <!-- Accent glow behind the ツ -->
+    <radialGradient id="glow" cx="50%" cy="50%" r="50%">
+      <stop offset="0%"   stop-color="#30D158" stop-opacity="0.25"/>
+      <stop offset="100%" stop-color="#30D158" stop-opacity="0"/>
+    </radialGradient>
+
+    <!-- Key gradient: subtle highlight on top of each key -->
+    <linearGradient id="key-grad" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%"   stop-color="#3A3A3C"/>
+      <stop offset="100%" stop-color="#2A2A2C"/>
+    </linearGradient>
+
+    <!-- Highlight key gradient (the featured center key) -->
+    <linearGradient id="key-accent" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%"   stop-color="#34E265"/>
+      <stop offset="100%" stop-color="#25A244"/>
+    </linearGradient>
+  </defs>
+
+  <!-- ── Background ────────────────────────────────────────────── -->
+  <rect width="1024" height="1024" fill="url(#bg)"/>
+
+  <!-- ── Accent glow behind main character ────────────────────── -->
+  <ellipse cx="512" cy="400" rx="320" ry="260" fill="url(#glow)"/>
+
+  <!-- ── Main display: large ツ on a "key" ────────────────────── -->
+  <!-- Key background (large, centered, top area) -->
+  <rect x="212" y="170" width="600" height="420"
+        rx="48" ry="48"
+        fill="url(#key-accent)"
+        opacity="0.95"/>
+  <!-- Key top-shine -->
+  <rect x="212" y="170" width="600" height="42"
+        rx="48" ry="48"
+        fill="white" opacity="0.08"/>
+  <!-- Key bottom-shadow -->
+  <rect x="212" y="548" width="600" height="42"
+        rx="48" ry="48"
+        fill="black" opacity="0.15"/>
+
+  <!-- ツ character centered on the key -->
+  <text x="512" y="460"
+        font-family="'Helvetica Neue', 'Arial', sans-serif"
+        font-size="320"
+        font-weight="700"
+        fill="white"
+        text-anchor="middle"
+        dominant-baseline="middle"
+        opacity="0.97">ツ</text>
+
+  <!-- ── Keyboard row 1 (8 small keys) ─────────────────────────── -->
+  <!--
+    Key: 90×54 px, radius 10, gap 12 px
+    Total row width: 8×90 + 7×12 = 804  →  start x = (1024-804)/2 = 110
+  -->
+  <g fill="url(#key-grad)" stroke="#48484A" stroke-width="1.5" opacity="0.85">
+    <rect x="110"  y="640" width="90" height="54" rx="10"/>
+    <rect x="212"  y="640" width="90" height="54" rx="10"/>
+    <rect x="314"  y="640" width="90" height="54" rx="10"/>
+    <rect x="416"  y="640" width="90" height="54" rx="10"/>
+    <rect x="518"  y="640" width="90" height="54" rx="10"/>
+    <rect x="620"  y="640" width="90" height="54" rx="10"/>
+    <rect x="722"  y="640" width="90" height="54" rx="10"/>
+    <rect x="824"  y="640" width="90" height="54" rx="10"/>
+  </g>
+
+  <!-- ASCII art hints on a few row-1 keys -->
+  <g font-family="'Courier New', 'Monaco', monospace" font-size="22"
+     fill="#30D158" text-anchor="middle" dominant-baseline="middle" opacity="0.9">
+    <text x="155"  y="667">¯</text>
+    <text x="257"  y="667">\</text>
+    <text x="359"  y="667">_</text>
+    <text x="461"  y="667">(</text>
+    <text x="563"  y="667">ツ</text>
+    <text x="665"  y="667">)</text>
+    <text x="767"  y="667">_</text>
+    <text x="869"  y="667">/</text>
+  </g>
+
+  <!-- ── Keyboard row 2 (7 keys, offset) ───────────────────────── -->
+  <!--
+    7×90 + 6×12 = 702  →  start x = (1024-702)/2 = 161
+  -->
+  <g fill="url(#key-grad)" stroke="#48484A" stroke-width="1.5" opacity="0.7">
+    <rect x="161"  y="710" width="90" height="54" rx="10"/>
+    <rect x="263"  y="710" width="90" height="54" rx="10"/>
+    <rect x="365"  y="710" width="90" height="54" rx="10"/>
+    <rect x="467"  y="710" width="90" height="54" rx="10"/>
+    <rect x="569"  y="710" width="90" height="54" rx="10"/>
+    <rect x="671"  y="710" width="90" height="54" rx="10"/>
+    <rect x="773"  y="710" width="90" height="54" rx="10"/>
+  </g>
+
+  <!-- Symbols on row-2 keys -->
+  <g font-family="'Courier New', 'Monaco', monospace" font-size="22"
+     fill="#636366" text-anchor="middle" dominant-baseline="middle" opacity="0.8">
+    <text x="206" y="737">♥</text>
+    <text x="308" y="737">★</text>
+    <text x="410" y="737">░</text>
+    <text x="512" y="737">▒</text>
+    <text x="614" y="737">▓</text>
+    <text x="716" y="737">∞</text>
+    <text x="818" y="737">☯</text>
+  </g>
+
+  <!-- ── Keyboard row 3: space bar ─────────────────────────────── -->
+  <rect x="262" y="780" width="500" height="54"
+        rx="14"
+        fill="url(#key-grad)" stroke="#48484A" stroke-width="1.5" opacity="0.6"/>
+  <!-- "ASCIIboard" label on space bar -->
+  <text x="512" y="807"
+        font-family="'Helvetica Neue', 'Arial', sans-serif"
+        font-size="24"
+        font-weight="600"
+        fill="#636366"
+        text-anchor="middle"
+        dominant-baseline="middle"
+        letter-spacing="4"
+        opacity="0.9">ASCIIboard</text>
+
+  <!-- ── Subtle bottom fade ────────────────────────────────────── -->
+  <rect width="1024" height="1024" fill="url(#fade-bottom)" opacity="0.3"/>
+</svg>
