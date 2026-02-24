@@ -23,10 +23,18 @@ struct FavoritesView: View {
     }
 
     private var emptyState: some View {
-        ContentUnavailableView(
-            "No Favorites Yet",
-            systemImage: "star",
-            description: Text("Tap the ★ on any ASCII art to save it here.")
-        )
+        VStack(spacing: 16) {
+            Image(systemName: "star")
+                .font(.system(size: 52))
+                .foregroundColor(.secondary)
+            Text("No Favorites Yet")
+                .font(.title2.bold())
+            Text("Tap the ★ on any ASCII art to save it here.")
+                .font(.subheadline)
+                .foregroundColor(.secondary)
+                .multilineTextAlignment(.center)
+        }
+        .padding()
+        .frame(maxWidth: .infinity, maxHeight: .infinity)
     }
 }

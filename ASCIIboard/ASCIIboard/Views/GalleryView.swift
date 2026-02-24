@@ -67,7 +67,19 @@ struct GalleryView: View {
     @ViewBuilder
     private var itemList: some View {
         if filteredItems.isEmpty {
-            ContentUnavailableView.search(text: searchText)
+            VStack(spacing: 16) {
+                Image(systemName: "magnifyingglass")
+                    .font(.system(size: 52))
+                    .foregroundColor(.secondary)
+                Text("No Results")
+                    .font(.title2.bold())
+                Text("No ASCII art found for \"\(searchText)\".")
+                    .font(.subheadline)
+                    .foregroundColor(.secondary)
+                    .multilineTextAlignment(.center)
+            }
+            .padding()
+            .frame(maxWidth: .infinity, maxHeight: .infinity)
         } else {
             List(filteredItems) { item in
                 GalleryItemRow(item: item)

@@ -61,6 +61,6 @@ final class KeyboardViewController: UIInputViewController {
 
     // MARK: - Required UIInputViewController Stubs
 
-    override func textWillChange(_ textInput: (any UITextInput)?) {}
-    override func textDidChange(_ textInput: (any UITextInput)?) {}
+    override func textWillChange(_ textInput: UITextInput?) {}
+    override func textDidChange(_ textInput: UITextInput?) {}
 }
