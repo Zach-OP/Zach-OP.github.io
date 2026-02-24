@@ -26,6 +26,16 @@ struct HomeView: View {
                 }
             }
             .background(Color(.systemGroupedBackground))
+            // Match the navigation bar colour to the dark top of the graffiti
+            // banner so there is no white gap between the bar and the banner.
+            .toolbarBackground(
+                Color(red: 0.08, green: 0.08, blue: 0.10),
+                for: .navigationBar
+            )
+            .toolbarBackground(.visible, for: .navigationBar)
+            // Use the dark colour scheme so the status bar icons (time,
+            // battery, etc.) and the inline nav title appear in white.
+            .toolbarColorScheme(.dark, for: .navigationBar)
             .navigationTitle("ASCIIboard")
             .navigationBarTitleDisplayMode(.inline)
         }
