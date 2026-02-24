@@ -14,41 +14,71 @@ struct HomeView: View {
     var body: some View {
         NavigationStack {
             ScrollView {
-                VStack(spacing: 24) {
-                    logoHeader
-                    statsRow
-                    setupBanner
-                    featuredSection
+                VStack(spacing: 0) {
+                    graffitiHero
+                    VStack(spacing: 24) {
+                        statsRow
+                        setupBanner
+                        featuredSection
+                    }
+                    .padding(.top, 20)
+                    .padding(.bottom, 24)
                 }
-                .padding(.bottom, 24)
             }
             .background(Color(.systemGroupedBackground))
             .navigationTitle("ASCIIboard")
-            .navigationBarTitleDisplayMode(.large)
+            .navigationBarTitleDisplayMode(.inline)
         }
     }
 
-    // MARK: - Logo Header
+    // MARK: - Graffiti Hero Banner
 
-    private var logoHeader: some View {
-        VStack(spacing: 8) {
-            Text("""
-  ___  ___  ___ ___ ___ _
- / _ \\/ __||  _|_ _|_ _| |_  ___  __ _  _ _  __| |
-| (_) \\__ \\| (_) || | | || . \\/ _ \\/ _` || '_|/ _` |
- \\__\\_\\___/ \\___||_||___|_|_|\\___/\\__,_||_|  \\__,_|
-""")
-            .font(.system(size: 10, design: .monospaced))
-            .foregroundColor(.accentColor)
-            .minimumScaleFactor(0.3)
-            .lineLimit(4)
+    private var graffitiHero: some View {
+        GeometryReader { geo in
+            ZStack {
+                // Background
+                LinearGradient(
+                    colors: [Color(.init(red: 0.08, green: 0.08, blue: 0.10, alpha: 1)),
+                             Color(.init(red: 0.12, green: 0.13, blue: 0.16, alpha: 1))],
+                    startPoint: .topLeading,
+                    endPoint: .bottomTrailing
+                )
 
-            Text("Your ASCII Art Keyboard")
-                .font(.subheadline)
-                .foregroundColor(.secondary)
+                // Scattered ASCII art graffiti pieces
+                ForEach(graffitiPieces, id: \.text) { piece in
+                    Text(piece.text)
+                        .font(.system(size: piece.fontSize, design: .monospaced))
+                        .foregroundColor(piece.color)
+                        .opacity(piece.opacity)
+                        .rotationEffect(.degrees(piece.rotation))
+                        .position(
+                            x: geo.size.width  * piece.relX,
+                            y: geo.size.height * piece.relY
+                        )
+                }
+
+                // Centered app name + tagline
+                VStack(spacing: 6) {
+                    Text("ASCIIboard")
+                        .font(.system(size: 34, weight: .black, design: .monospaced))
+                        .foregroundColor(.white)
+                        .shadow(color: .black.opacity(0.6), radius: 8, x: 0, y: 2)
+                    Text("Your ASCII Art Keyboard")
+                        .font(.system(size: 13, weight: .medium))
+                        .foregroundColor(.white.opacity(0.6))
+                        .tracking(1.5)
+                }
+
+                // Bottom fade into the page background
+                LinearGradient(
+                    colors: [.clear, Color(.systemGroupedBackground)],
+                    startPoint: .center,
+                    endPoint: .bottom
+                )
+            }
+            .clipped()
         }
-        .padding(.top, 8)
-        .padding(.horizontal)
+        .frame(height: 220)
     }
 
     // MARK: - Stats
@@ -119,6 +149,48 @@ struct HomeView: View {
     }
 }
 
+// MARK: - Graffiti Piece Data
+
+private struct GraffitiPiece {
+    let text: String
+    let relX: CGFloat   // 0…1 relative to banner width
+    let relY: CGFloat   // 0…1 relative to banner height
+    let rotation: Double
+    let fontSize: CGFloat
+    let opacity: Double
+    let color: Color
+}
+
+// Positions are hand-tuned so pieces feel randomly scattered but
+// avoid the centre where the title sits.
+private let graffitiPieces: [GraffitiPiece] = [
+    // Top-left cluster
+    GraffitiPiece(text: "¯\\_(ツ)_/¯",      relX: 0.10, relY: 0.18, rotation: -14, fontSize: 13, opacity: 0.55, color: .accentColor),
+    GraffitiPiece(text: "░▒▓█▓▒░",          relX: 0.22, relY: 0.06, rotation:   3, fontSize: 11, opacity: 0.22, color: .white),
+    GraffitiPiece(text: "ʕ•ᴥ•ʔ",            relX: 0.05, relY: 0.58, rotation:  18, fontSize: 17, opacity: 0.42, color: .white),
+
+    // Top-right cluster
+    GraffitiPiece(text: "(╯°□°）╯︵ ┻━┻",   relX: 0.72, relY: 0.12, rotation:   9, fontSize: 10, opacity: 0.38, color: .accentColor),
+    GraffitiPiece(text: "(◕‿◕)",             relX: 0.88, relY: 0.30, rotation: -11, fontSize: 18, opacity: 0.45, color: .white),
+    GraffitiPiece(text: "★ ☆ ★",            relX: 0.80, relY: 0.68, rotation:  -6, fontSize: 13, opacity: 0.28, color: .accentColor),
+
+    // Left edge
+    GraffitiPiece(text: "✦ ✧ ✦",            relX: -0.02, relY: 0.40, rotation: -22, fontSize: 15, opacity: 0.30, color: .accentColor),
+    GraffitiPiece(text: "щ(ಠ益ಠщ)",         relX: 0.14, relY: 0.82, rotation: -10, fontSize: 11, opacity: 0.35, color: .accentColor),
+
+    // Right edge
+    GraffitiPiece(text: "(ง'̀-'́)ง",           relX: 1.01, relY: 0.55, rotation:  14, fontSize: 13, opacity: 0.38, color: .white),
+    GraffitiPiece(text: "♥ ♦ ♣ ♠",          relX: 0.90, relY: 0.85, rotation:   7, fontSize: 12, opacity: 0.25, color: .white),
+
+    // Bottom scattered
+    GraffitiPiece(text: "ヽ(°〇°)ﾉ",        relX: 0.35, relY: 0.90, rotation:  -8, fontSize: 12, opacity: 0.30, color: .accentColor),
+    GraffitiPiece(text: "ヾ(⌐■_■)ノ♪",      relX: 0.60, relY: 0.82, rotation:  12, fontSize: 11, opacity: 0.28, color: .white),
+
+    // Mid-left / mid-right (avoid dead centre)
+    GraffitiPiece(text: "( ͡° ͜ʖ ͡°)",        relX: 0.18, relY: 0.46, rotation:  20, fontSize: 14, opacity: 0.32, color: .white),
+    GraffitiPiece(text: "٩(◕‿◕｡)۶",         relX: 0.82, relY: 0.48, rotation:  -9, fontSize: 12, opacity: 0.30, color: .accentColor),
+]
+
 // MARK: - Reusable Components
 
 struct StatCard: View {
@@ -160,7 +232,6 @@ struct ASCIIItemRow: View {
             Spacer()
 
             HStack(spacing: 8) {
-                // Favorite toggle
                 Button {
                     favorites.toggle(item)
                 } label: {
@@ -168,7 +239,6 @@ struct ASCIIItemRow: View {
                         .foregroundColor(favorites.isFavorite(item) ? .yellow : .secondary)
                 }
 
-                // Copy button
                 Button {
                     UIPasteboard.general.string = item.art
                     copied = true
