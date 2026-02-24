@@ -129,7 +129,7 @@ struct KeyboardView: View {
             Image(systemName: "magnifyingglass")
                 .font(.largeTitle)
                 .foregroundColor(.secondary)
-            Text(isSearching ? "No results for "\(searchText)"" : "No items")
+            Text(isSearching ? "No results for \"\(searchText)\"" : "No items")
                 .font(.caption)
                 .foregroundColor(.secondary)
         }
