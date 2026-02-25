@@ -2,6 +2,7 @@ import SwiftUI
 
 struct HomeView: View {
     @EnvironmentObject private var favorites: FavoritesStore
+    @State private var showingCreateView = false
 
     private let featured: [ASCIIItem] = [
         ASCIIItem(id: "shrug",      name: "Shrug",       art: "¯\\_(ツ)_/¯"),
@@ -13,25 +14,47 @@ struct HomeView: View {
 
     var body: some View {
         NavigationStack {
-            ScrollView {
-                VStack(spacing: 0) {
-                    graffitiHero
-                    VStack(spacing: 24) {
-                        statsRow
-                        setupBanner
-                        featuredSection
+            ZStack(alignment: .bottomTrailing) {
+                ScrollView {
+                    VStack(spacing: 0) {
+                        graffitiHero
+                        VStack(spacing: 24) {
+                            statsRow
+                            setupBanner
+                            featuredSection
+                        }
+                        .padding(.top, 20)
+                        .padding(.bottom, 24)
                     }
-                    .padding(.top, 20)
-                    .padding(.bottom, 24)
                 }
+                .background(Color(.systemGroupedBackground))
+                .ignoresSafeArea(edges: .top)
+                // Transparent nav bar — the gradient behind it does the colouring.
+                .toolbarBackground(.hidden, for: .navigationBar)
+                // Keep status-bar icons in white.
+                .toolbarColorScheme(.dark, for: .navigationBar)
+                
+                // Floating Action Button
+                Button {
+                    showingCreateView = true
+                } label: {
+                    Image(systemName: "plus")
+                        .font(.title2.bold())
+                        .foregroundColor(.white)
+                        .frame(width: 60, height: 60)
+                        .background(
+                            Circle()
+                                .fill(Color.accentColor)
+                                .shadow(color: .black.opacity(0.3), radius: 8, x: 0, y: 4)
+                        )
+                }
+                .padding(.trailing, 20)
+                .padding(.bottom, 20)
             }
-            .background(Color(.systemGroupedBackground))
-            // Transparent nav bar — the gradient behind it does the colouring.
-            .toolbarBackground(.hidden, for: .navigationBar)
-            // Keep status-bar icons and inline title in white.
-            .toolbarColorScheme(.dark, for: .navigationBar)
-            .navigationTitle("ASCIIboard")
-            .navigationBarTitleDisplayMode(.inline)
+            .sheet(isPresented: $showingCreateView) {
+                CreateASCIIView()
+                    .environmentObject(CustomASCIIStore.shared)
+            }
         }
     }
 

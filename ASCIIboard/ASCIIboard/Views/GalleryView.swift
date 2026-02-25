@@ -1,9 +1,13 @@
 import SwiftUI
 
+import SwiftUI
+
 struct GalleryView: View {
     @EnvironmentObject private var favorites: FavoritesStore
+    @EnvironmentObject private var customStore: CustomASCIIStore
     @State private var searchText = ""
     @State private var selectedCategoryId: String? = nil
+    @State private var showingCreateView = false
 
     private var displayedCategories: [ASCIICategory] {
         ASCIILibrary.categories
@@ -22,14 +26,36 @@ struct GalleryView: View {
 
     var body: some View {
         NavigationStack {
-            VStack(spacing: 0) {
-                categoryBar
-                Divider()
-                itemList
+            ZStack(alignment: .bottomTrailing) {
+                VStack(spacing: 0) {
+                    categoryBar
+                    Divider()
+                    itemList
+                }
+                .background(Color(.systemGroupedBackground))
+                .navigationTitle("Browse")
+                .searchable(text: $searchText, prompt: "Search ASCII art…")
+                
+                // Floating Action Button
+                Button {
+                    showingCreateView = true
+                } label: {
+                    Image(systemName: "plus")
+                        .font(.title2.bold())
+                        .foregroundColor(.white)
+                        .frame(width: 60, height: 60)
+                        .background(
+                            Circle()
+                                .fill(Color.accentColor)
+                                .shadow(color: .black.opacity(0.3), radius: 8, x: 0, y: 4)
+                        )
+                }
+                .padding(.trailing, 20)
+                .padding(.bottom, 20)
             }
-            .background(Color(.systemGroupedBackground))
-            .navigationTitle("Browse")
-            .searchable(text: $searchText, prompt: "Search ASCII art…")
+            .sheet(isPresented: $showingCreateView) {
+                CreateASCIIView()
+            }
         }
     }
 

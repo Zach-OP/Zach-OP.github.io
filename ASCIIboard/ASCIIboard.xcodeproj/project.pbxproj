@@ -10,17 +10,20 @@
 		13C5ADDAFFFF467B17B352D2 /* ASCIIArt.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45A68E1E44355528E30160F1 /* ASCIIArt.swift */; };
 		1ABB95DA9386FAE18F37A60E /* KeyboardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 892DDCE6429B7ACD6E660168 /* KeyboardViewController.swift */; };
 		46CAFBEA0291148F864B8686 /* ASCIILibrary.swift in Sources */ = {isa = PBXBuildFile; fileRef = 463AFF373C5C48E2AB3F2FB5 /* ASCIILibrary.swift */; };
+		7351DB276FD1544D1138FF30 /* AppIconGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = A918AAEBF42A1200E7BEB28E /* AppIconGenerator.swift */; };
 		8CDD98B8149DE2B1F9F00EF2 /* ASCIIArt.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45A68E1E44355528E30160F1 /* ASCIIArt.swift */; };
 		8F02EE729362EC96A458E9F8 /* FavoritesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD9E4148B0B0190FA9620855 /* FavoritesView.swift */; };
 		90DF4E033F008CB1A8E3664B /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD554EFEADF69BDD2D28388C /* ContentView.swift */; };
 		94C4820904AFF2DBF220EAED /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A6E1639099A9183ACD6A2643 /* Assets.xcassets */; };
 		9B33FA73448D2E13186D3EB8 /* ASCIIboardApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD3E45DF05166F9BC0FF5BF2 /* ASCIIboardApp.swift */; };
+		9FC88A732F4E9D2C00A32A4D /* CreateASCIIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B970A53F7D8999640D892058 /* CreateASCIIView.swift */; };
 		BC2D0FCD5745B1C5F4910C6E /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BE4945B1247803108FAF1F9 /* HomeView.swift */; };
 		C0D1993A3DF091CB3483AF91 /* ASCIIboardKeyboard.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = 212DC679215B6E13BC4C19EC /* ASCIIboardKeyboard.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		C135FCA13AD4C6957DE6C952 /* KeyboardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0ABC62F810B660AD45B6351E /* KeyboardView.swift */; };
 		E72FF575A9F3303353C5C97E /* GalleryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E231C6014B476859F9273BE1 /* GalleryView.swift */; };
 		E884B3F07C28E6FF4821B20A /* ASCIILibrary.swift in Sources */ = {isa = PBXBuildFile; fileRef = 463AFF373C5C48E2AB3F2FB5 /* ASCIILibrary.swift */; };
 		EDDF8ED4E0F23E60C5BAA958 /* SetupGuideView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3314B5979C1C5DC505A184E /* SetupGuideView.swift */; };
+		F2EB36BD922FEE7F0774AE20 /* CreateASCIIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B970A53F7D8999640D892058 /* CreateASCIIView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -50,15 +53,17 @@
 /* Begin PBXFileReference section */
 		0ABC62F810B660AD45B6351E /* KeyboardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyboardView.swift; sourceTree = "<group>"; };
 		1CCAD7694C1E3107CC72DE7B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
-		212DC679215B6E13BC4C19EC /* ASCIIboardKeyboard.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = ASCIIboardKeyboard.appex; sourceTree = BUILT_PRODUCTS_DIR; };
+		212DC679215B6E13BC4C19EC /* ASCIIboardKeyboard.appex */ = {isa = PBXFileReference; includeInIndex = 0; lastKnownFileType = "wrapper.app-extension"; path = ASCIIboardKeyboard.appex; sourceTree = BUILT_PRODUCTS_DIR; };
 		45A68E1E44355528E30160F1 /* ASCIIArt.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ASCIIArt.swift; sourceTree = "<group>"; };
 		463AFF373C5C48E2AB3F2FB5 /* ASCIILibrary.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ASCIILibrary.swift; sourceTree = "<group>"; };
-		6418D04E7FFFA78595192347 /* ASCIIboard.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ASCIIboard.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		6418D04E7FFFA78595192347 /* ASCIIboard.app */ = {isa = PBXFileReference; includeInIndex = 0; lastKnownFileType = wrapper.application; path = ASCIIboard.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		7BE4945B1247803108FAF1F9 /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
 		892DDCE6429B7ACD6E660168 /* KeyboardViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyboardViewController.swift; sourceTree = "<group>"; };
 		A6E1639099A9183ACD6A2643 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		A918AAEBF42A1200E7BEB28E /* AppIconGenerator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppIconGenerator.swift; sourceTree = "<group>"; };
 		AD9E4148B0B0190FA9620855 /* FavoritesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoritesView.swift; sourceTree = "<group>"; };
 		B3314B5979C1C5DC505A184E /* SetupGuideView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetupGuideView.swift; sourceTree = "<group>"; };
+		B970A53F7D8999640D892058 /* CreateASCIIView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateASCIIView.swift; sourceTree = "<group>"; };
 		BD3E45DF05166F9BC0FF5BF2 /* ASCIIboardApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ASCIIboardApp.swift; sourceTree = "<group>"; };
 		BD554EFEADF69BDD2D28388C /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		E231C6014B476859F9273BE1 /* GalleryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GalleryView.swift; sourceTree = "<group>"; };
@@ -111,6 +116,8 @@
 		D5AF05631F4955A996AFAE1B /* ASCIIboardKeyboard */ = {
 			isa = PBXGroup;
 			children = (
+				A918AAEBF42A1200E7BEB28E /* AppIconGenerator.swift */,
+				B970A53F7D8999640D892058 /* CreateASCIIView.swift */,
 				1CCAD7694C1E3107CC72DE7B /* Info.plist */,
 				0ABC62F810B660AD45B6351E /* KeyboardView.swift */,
 				892DDCE6429B7ACD6E660168 /* KeyboardViewController.swift */,
@@ -182,7 +189,7 @@
 			isa = PBXProject;
 			attributes = {
 				BuildIndependentTargetsInParallel = YES;
-				LastUpgradeCheck = 2620;
+				LastUpgradeCheck = 1540;
 				TargetAttributes = {
 					41BF19D433824E6D0A803145 = {
 						ProvisioningStyle = Automatic;
@@ -229,6 +236,8 @@
 			files = (
 				13C5ADDAFFFF467B17B352D2 /* ASCIIArt.swift in Sources */,
 				46CAFBEA0291148F864B8686 /* ASCIILibrary.swift in Sources */,
+				7351DB276FD1544D1138FF30 /* AppIconGenerator.swift in Sources */,
+				F2EB36BD922FEE7F0774AE20 /* CreateASCIIView.swift in Sources */,
 				C135FCA13AD4C6957DE6C952 /* KeyboardView.swift in Sources */,
 				1ABB95DA9386FAE18F37A60E /* KeyboardViewController.swift in Sources */,
 			);
@@ -238,6 +247,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9FC88A732F4E9D2C00A32A4D /* CreateASCIIView.swift in Sources */,
 				8CDD98B8149DE2B1F9F00EF2 /* ASCIIArt.swift in Sources */,
 				E884B3F07C28E6FF4821B20A /* ASCIILibrary.swift in Sources */,
 				9B33FA73448D2E13186D3EB8 /* ASCIIboardApp.swift in Sources */,
@@ -318,7 +328,6 @@
 				ENABLE_BITCODE = NO;
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
-				ENABLE_USER_SCRIPT_SANDBOXING = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
@@ -332,7 +341,6 @@
 				MTL_FAST_MATH = YES;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = iphoneos;
-				STRING_CATALOG_GENERATE_SYMBOLS = YES;
 				SWIFT_COMPILATION_MODE = wholemodule;
 				SWIFT_OPTIMIZATION_LEVEL = "-O";
 				SWIFT_VERSION = 5.10;
@@ -396,7 +404,6 @@
 				ENABLE_BITCODE = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
-				ENABLE_USER_SCRIPT_SANDBOXING = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_NO_COMMON_BLOCKS = YES;
@@ -417,7 +424,6 @@
 				ONLY_ACTIVE_ARCH = YES;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = iphoneos;
-				STRING_CATALOG_GENERATE_SYMBOLS = YES;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.10;

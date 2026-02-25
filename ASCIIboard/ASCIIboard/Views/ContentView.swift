@@ -2,6 +2,7 @@ import SwiftUI
 
 struct ContentView: View {
     @StateObject private var favorites = FavoritesStore.shared
+    @StateObject private var customStore = CustomASCIIStore.shared
 
     var body: some View {
         TabView {
@@ -26,5 +27,6 @@ struct ContentView: View {
                 }
         }
         .environmentObject(favorites)
+        .environmentObject(customStore)
     }
 }

@@ -9,12 +9,13 @@ struct KeyboardView: View {
     let onDelete: () -> Void
     let onSwitchKeyboard: () -> Void
 
-    @State private var selectedCategoryId: String = ASCIILibrary.categories[0].id
+    @State private var selectedCategoryId: String = ASCIILibrary.categories.first?.id ?? "emoticons"
     @State private var searchText: String = ""
     @State private var isSearching: Bool = false
     @State private var lastInsertedId: String? = nil
 
     @StateObject private var favorites = FavoritesStore.shared
+    @StateObject private var customStore = CustomASCIIStore.shared
 
     private var visibleCategories: [ASCIICategory] {
         ASCIILibrary.categories

@@ -32,6 +32,71 @@ struct ASCIIItem: Identifiable, Codable, Equatable, Hashable {
     }
 }
 
+// MARK: - Custom ASCII Item
+
+struct CustomASCIIItem: Codable, Identifiable {
+    let id: String
+    let name: String
+    let art: String
+    let categoryId: String
+    
+    func toASCIIItem() -> ASCIIItem {
+        ASCIIItem(id: id, name: name, art: art)
+    }
+}
+
+// MARK: - Custom ASCII Store
+
+final class CustomASCIIStore: ObservableObject {
+    static let shared = CustomASCIIStore()
+
+    private let defaults: UserDefaults
+    private let key = "asciboard.customItems"
+
+    @Published private(set) var customItems: [CustomASCIIItem] = []
+
+    private init() {
+        // Use App Group suite so both the main app and keyboard extension share custom items.
+        defaults = UserDefaults(suiteName: "group.io.github.zachop.asciboard") ?? .standard
+        loadCustomItems()
+    }
+
+    private func loadCustomItems() {
+        if let data = defaults.data(forKey: key),
+           let items = try? JSONDecoder().decode([CustomASCIIItem].self, from: data) {
+            customItems = items
+        }
+    }
+
+    private func saveCustomItems() {
+        if let data = try? JSONEncoder().encode(customItems) {
+            defaults.set(data, forKey: key)
+        }
+    }
+
+    func add(name: String, art: String, categoryId: String) {
+        let id = "custom_\(UUID().uuidString)"
+        let item = CustomASCIIItem(id: id, name: name, art: art, categoryId: categoryId)
+        customItems.append(item)
+        saveCustomItems()
+    }
+
+    func delete(_ item: CustomASCIIItem) {
+        customItems.removeAll { $0.id == item.id }
+        saveCustomItems()
+    }
+
+    func items(for categoryId: String) -> [ASCIIItem] {
+        customItems
+            .filter { $0.categoryId == categoryId }
+            .map { $0.toASCIIItem() }
+    }
+
+    var allCustomASCIIItems: [ASCIIItem] {
+        customItems.map { $0.toASCIIItem() }
+    }
+}
+
 // MARK: - Favorites Store
 
 final class FavoritesStore: ObservableObject {

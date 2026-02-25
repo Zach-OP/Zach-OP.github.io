@@ -7,15 +7,25 @@ enum ASCIILibrary {
 
     // MARK: - All Categories
 
-    static let categories: [ASCIICategory] = [
-        emoticons,
-        animals,
-        reactions,
-        symbols,
-        dividers,
-        art,
-        textArt,
-    ]
+    static var categories: [ASCIICategory] {
+        var allCategories = [
+            emoticons,
+            animals,
+            reactions,
+            symbols,
+            dividers,
+            art,
+            textArt,
+        ]
+        
+        // Add custom category if there are custom items
+        let customStore = CustomASCIIStore.shared
+        if !customStore.customItems.isEmpty {
+            allCategories.insert(customCategory, at: 0)
+        }
+        
+        return allCategories
+    }
 
     // MARK: - Computed Helpers
 
@@ -24,7 +34,25 @@ enum ASCIILibrary {
     }
 
     static func category(withId id: String) -> ASCIICategory? {
-        categories.first { $0.id == id }
+        if id == "custom" {
+            return customCategory
+        }
+        
+        // For built-in categories, merge in custom items assigned to that category
+        if let baseCategory = builtInCategories.first(where: { $0.id == id }) {
+            let customItems = CustomASCIIStore.shared.items(for: id)
+            if customItems.isEmpty {
+                return baseCategory
+            }
+            return ASCIICategory(
+                id: baseCategory.id,
+                name: baseCategory.name,
+                systemIcon: baseCategory.systemIcon,
+                items: baseCategory.items + customItems
+            )
+        }
+        
+        return nil
     }
 
     static func items(matching query: String) -> [ASCIIItem] {
@@ -34,6 +62,29 @@ enum ASCIILibrary {
             $0.name.lowercased().contains(q) || $0.art.lowercased().contains(q)
         }
     }
+    
+    // MARK: - Custom Category
+    
+    static var customCategory: ASCIICategory {
+        ASCIICategory(
+            id: "custom",
+            name: "Custom",
+            systemIcon: "square.and.pencil",
+            items: CustomASCIIStore.shared.allCustomASCIIItems
+        )
+    }
+    
+    // MARK: - Built-in Categories
+    
+    private static let builtInCategories: [ASCIICategory] = [
+        emoticons,
+        animals,
+        reactions,
+        symbols,
+        dividers,
+        art,
+        textArt,
+    ]
 
     // MARK: - Category Definitions
 
