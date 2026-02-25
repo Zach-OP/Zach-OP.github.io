@@ -26,15 +26,9 @@ struct HomeView: View {
                 }
             }
             .background(Color(.systemGroupedBackground))
-            // Match the navigation bar colour to the dark top of the graffiti
-            // banner so there is no white gap between the bar and the banner.
-            .toolbarBackground(
-                Color(red: 0.08, green: 0.08, blue: 0.10),
-                for: .navigationBar
-            )
-            .toolbarBackground(.visible, for: .navigationBar)
-            // Use the dark colour scheme so the status bar icons (time,
-            // battery, etc.) and the inline nav title appear in white.
+            // Transparent nav bar — the gradient behind it does the colouring.
+            .toolbarBackground(.hidden, for: .navigationBar)
+            // Keep status-bar icons and inline title in white.
             .toolbarColorScheme(.dark, for: .navigationBar)
             .navigationTitle("ASCIIboard")
             .navigationBarTitleDisplayMode(.inline)
@@ -46,13 +40,8 @@ struct HomeView: View {
     private var graffitiHero: some View {
         GeometryReader { geo in
             ZStack {
-                // Background
-                LinearGradient(
-                    colors: [Color(.init(red: 0.08, green: 0.08, blue: 0.10, alpha: 1)),
-                             Color(.init(red: 0.12, green: 0.13, blue: 0.16, alpha: 1))],
-                    startPoint: .topLeading,
-                    endPoint: .bottomTrailing
-                )
+                // NOTE: gradient lives in .background below so it can extend
+                // behind the navigation bar via ignoresSafeArea(edges: .top).
 
                 // Scattered ASCII art graffiti pieces
                 ForEach(graffitiPieces, id: \.text) { piece in
@@ -89,6 +78,18 @@ struct HomeView: View {
             .clipped()
         }
         .frame(height: 220)
+        // Applying the gradient here — outside the GeometryReader — lets
+        // ignoresSafeArea push its startPoint all the way to the top of the
+        // screen, so the gradient continues seamlessly behind the nav bar.
+        .background(
+            LinearGradient(
+                colors: [Color(red: 0.08, green: 0.08, blue: 0.10),
+                         Color(red: 0.12, green: 0.13, blue: 0.16)],
+                startPoint: .topLeading,
+                endPoint: .bottomTrailing
+            )
+            .ignoresSafeArea(edges: .top)
+        )
     }
 
     // MARK: - Stats
