@@ -104,8 +104,10 @@ final class FavoritesStore: ObservableObject {
 
     private let defaults: UserDefaults
     private let key = "asciboard.favorites"
+    private let orderKey = "asciboard.favorites.order"
 
     @Published private(set) var favoriteIDs: Set<String> = []
+    @Published private(set) var favoriteOrder: [String] = []
 
     private init() {
         // Use App Group suite so both the main app and keyboard extension share favorites.
@@ -113,6 +115,9 @@ final class FavoritesStore: ObservableObject {
         defaults = UserDefaults(suiteName: "group.io.github.zachop.asciboard") ?? .standard
         let stored = defaults.stringArray(forKey: key) ?? []
         favoriteIDs = Set(stored)
+        // Load order; fall back to stored array order for existing users
+        let order = defaults.stringArray(forKey: orderKey) ?? stored
+        favoriteOrder = order.filter { favoriteIDs.contains($0) }
     }
 
     func isFavorite(_ item: ASCIIItem) -> Bool {
@@ -122,14 +127,17 @@ final class FavoritesStore: ObservableObject {
     func toggle(_ item: ASCIIItem) {
         if favoriteIDs.contains(item.id) {
             favoriteIDs.remove(item.id)
+            favoriteOrder.removeAll { $0 == item.id }
         } else {
             favoriteIDs.insert(item.id)
+            favoriteOrder.append(item.id)
         }
         defaults.set(Array(favoriteIDs), forKey: key)
+        defaults.set(favoriteOrder, forKey: orderKey)
     }
 
     var favoriteItems: [ASCIIItem] {
-        let allItems = ASCIILibrary.allItems
-        return allItems.filter { favoriteIDs.contains($0.id) }
+        let lookup = Dictionary(uniqueKeysWithValues: ASCIILibrary.allItems.map { ($0.id, $0) })
+        return favoriteOrder.compactMap { lookup[$0] }
     }
 }

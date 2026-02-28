@@ -20,6 +20,7 @@ struct ContentView: View {
                 .tabItem {
                     Label("Favorites", systemImage: "star.fill")
                 }
+                .badge(favorites.favoriteIDs.count)
 
             SetupGuideView()
                 .tabItem {
