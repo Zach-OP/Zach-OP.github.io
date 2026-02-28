@@ -76,7 +76,7 @@ enum ASCIILibrary {
     
     // MARK: - Built-in Categories
     
-    private static let builtInCategories: [ASCIICategory] = [
+    static let builtInCategories: [ASCIICategory] = [
         emoticons,
         animals,
         reactions,

@@ -8,18 +8,25 @@ struct GalleryView: View {
     @State private var showingCreateView = false
 
     private var displayedCategories: [ASCIICategory] {
-        ASCIILibrary.categories
+        var all = ASCIILibrary.builtInCategories
+        if !customStore.customItems.isEmpty {
+            all.insert(ASCIILibrary.customCategory, at: 0)
+        }
+        return all
     }
 
     private var filteredItems: [ASCIIItem] {
         if !searchText.isEmpty {
-            return ASCIILibrary.items(matching: searchText)
+            let q = searchText.lowercased()
+            return displayedCategories.flatMap { $0.items }.filter {
+                $0.name.lowercased().contains(q) || $0.art.lowercased().contains(q)
+            }
         }
         if let id = selectedCategoryId,
-           let category = ASCIILibrary.category(withId: id) {
+           let category = displayedCategories.first(where: { $0.id == id }) {
             return category.items
         }
-        return ASCIILibrary.allItems
+        return displayedCategories.flatMap { $0.items }
     }
 
     var body: some View {

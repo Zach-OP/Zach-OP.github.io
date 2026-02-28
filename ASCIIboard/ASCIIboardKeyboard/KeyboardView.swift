@@ -18,14 +18,21 @@ struct KeyboardView: View {
     @StateObject private var customStore = CustomASCIIStore.shared
 
     private var visibleCategories: [ASCIICategory] {
-        ASCIILibrary.categories
+        var all = ASCIILibrary.builtInCategories
+        if !customStore.customItems.isEmpty {
+            all.insert(ASCIILibrary.customCategory, at: 0)
+        }
+        return all
     }
 
     private var displayedItems: [ASCIIItem] {
         if isSearching && !searchText.isEmpty {
-            return ASCIILibrary.items(matching: searchText)
+            let q = searchText.lowercased()
+            return visibleCategories.flatMap { $0.items }.filter {
+                $0.name.lowercased().contains(q) || $0.art.lowercased().contains(q)
+            }
         }
-        return ASCIILibrary.category(withId: selectedCategoryId)?.items ?? []
+        return visibleCategories.first(where: { $0.id == selectedCategoryId })?.items ?? []
     }
 
     var body: some View {
