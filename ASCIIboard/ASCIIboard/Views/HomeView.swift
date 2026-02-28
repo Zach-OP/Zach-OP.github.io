@@ -3,6 +3,7 @@ import SwiftUI
 struct HomeView: View {
     @EnvironmentObject private var favorites: FavoritesStore
     @State private var showingCreateView = false
+    @State private var showingAbout = false
 
     private let featured: [ASCIIItem] = [
         ASCIIItem(id: "shrug",      name: "Shrug",       art: "¯\\_(ツ)_/¯"),
@@ -33,7 +34,17 @@ struct HomeView: View {
                 .toolbarBackground(.hidden, for: .navigationBar)
                 // Keep status-bar icons in white.
                 .toolbarColorScheme(.dark, for: .navigationBar)
-                
+                .toolbar {
+                    ToolbarItem(placement: .navigationBarTrailing) {
+                        Button {
+                            showingAbout = true
+                        } label: {
+                            Image(systemName: "info.circle")
+                                .foregroundColor(.white)
+                        }
+                    }
+                }
+
                 // Floating Action Button
                 Button {
                     showingCreateView = true
@@ -54,6 +65,9 @@ struct HomeView: View {
             .sheet(isPresented: $showingCreateView) {
                 CreateASCIIView()
                     .environmentObject(CustomASCIIStore.shared)
+            }
+            .sheet(isPresented: $showingAbout) {
+                AboutView()
             }
         }
     }
