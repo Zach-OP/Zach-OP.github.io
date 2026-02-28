@@ -1,7 +1,5 @@
 import SwiftUI
 
-import SwiftUI
-
 struct SetupGuideView: View {
     var body: some View {
         NavigationStack {

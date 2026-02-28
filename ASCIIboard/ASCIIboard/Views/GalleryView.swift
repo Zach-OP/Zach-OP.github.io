@@ -1,7 +1,5 @@
 import SwiftUI
 
-import SwiftUI
-
 struct GalleryView: View {
     @EnvironmentObject private var favorites: FavoritesStore
     @EnvironmentObject private var customStore: CustomASCIIStore
