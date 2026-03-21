@@ -8,7 +8,11 @@ struct CreateASCIIView: View {
     @State private var artName: String = ""
     @State private var selectedCategoryId: String = "emoticons"
     @State private var showingSavedConfirmation: Bool = false
-    
+    @State private var validationError: String? = nil
+
+    private static let maxArtLength = 500
+    private static let maxNameLength = 60
+
     private let availableCategories = [
         ("emoticons", "Emoticons", "face.smiling"),
         ("animals", "Animals", "pawprint.fill"),
@@ -21,7 +25,8 @@ struct CreateASCIIView: View {
     
     private var canSave: Bool {
         !artText.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty &&
-        !artName.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty
+        !artName.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty &&
+        validationError == nil
     }
     
     var body: some View {
@@ -60,7 +65,29 @@ struct CreateASCIIView: View {
             } message: {
                 Text("Your custom ASCII art has been saved and will appear in the \(categoryName(for: selectedCategoryId)) and Custom categories.")
             }
+            .onChange(of: artText) { _ in validate() }
+            .onChange(of: artName) { _ in validate() }
         }
+    }
+
+    private func validate() {
+        let trimmedArt = artText.trimmingCharacters(in: .whitespacesAndNewlines)
+        let trimmedName = artName.trimmingCharacters(in: .whitespacesAndNewlines)
+
+        if trimmedArt.count > Self.maxArtLength {
+            validationError = "ASCII art is too long (max \(Self.maxArtLength) characters)."
+            return
+        }
+        if trimmedName.count > Self.maxNameLength {
+            validationError = "Name is too long (max \(Self.maxNameLength) characters)."
+            return
+        }
+        let isDuplicate = customStore.customItems.contains { $0.name.lowercased() == trimmedName.lowercased() }
+        if isDuplicate {
+            validationError = "An item named \"\(trimmedName)\" already exists."
+            return
+        }
+        validationError = nil
     }
     
     // MARK: - Art Input Section
@@ -111,10 +138,16 @@ struct CreateASCIIView: View {
             TextField("e.g., Happy Face", text: $artName)
                 .textFieldStyle(.roundedBorder)
                 .autocorrectionDisabled()
-            
-            Text("Give your ASCII art a descriptive name")
-                .font(.caption)
-                .foregroundColor(.secondary)
+
+            if let error = validationError {
+                Text(error)
+                    .font(.caption)
+                    .foregroundColor(.red)
+            } else {
+                Text("Give your ASCII art a descriptive name")
+                    .font(.caption)
+                    .foregroundColor(.secondary)
+            }
         }
     }
     

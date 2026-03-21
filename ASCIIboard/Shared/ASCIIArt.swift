@@ -69,8 +69,11 @@ final class CustomASCIIStore: ObservableObject {
     }
 
     private func saveCustomItems() {
-        if let data = try? JSONEncoder().encode(customItems) {
+        do {
+            let data = try JSONEncoder().encode(customItems)
             defaults.set(data, forKey: key)
+        } catch {
+            print("ASCIIboard: Failed to save custom items — \(error)")
         }
     }
 

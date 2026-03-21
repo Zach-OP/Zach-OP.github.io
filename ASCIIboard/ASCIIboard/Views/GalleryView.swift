@@ -55,6 +55,7 @@ struct GalleryView: View {
                                 .shadow(color: .black.opacity(0.3), radius: 8, x: 0, y: 4)
                         )
                 }
+                .accessibilityLabel("Create ASCII Art")
                 .padding(.trailing, 20)
                 .padding(.bottom, 20)
             }
@@ -178,17 +179,20 @@ struct GalleryItemRow: View {
                     Image(systemName: favorites.isFavorite(item) ? "star.fill" : "star")
                         .foregroundColor(favorites.isFavorite(item) ? .yellow : .secondary)
                 }
+                .accessibilityLabel(favorites.isFavorite(item) ? "Remove from favorites" : "Add to favorites")
 
                 Button {
                     UIPasteboard.general.string = item.art
                     copied = true
-                    DispatchQueue.main.asyncAfter(deadline: .now() + 1.5) {
+                    Task {
+                        try? await Task.sleep(for: .seconds(1.5))
                         copied = false
                     }
                 } label: {
                     Image(systemName: copied ? "checkmark" : "doc.on.doc")
                         .foregroundColor(copied ? .green : .accentColor)
                 }
+                .accessibilityLabel(copied ? "Copied!" : "Copy to clipboard")
             }
         }
         .padding(.vertical, 4)

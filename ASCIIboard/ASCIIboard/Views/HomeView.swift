@@ -5,13 +5,11 @@ struct HomeView: View {
     @State private var showingCreateView = false
     @State private var showingAbout = false
 
-    private let featured: [ASCIIItem] = [
-        ASCIIItem(id: "shrug",      name: "Shrug",       art: "¯\\_(ツ)_/¯"),
-        ASCIIItem(id: "flip",       name: "Table Flip",  art: "(╯°□°）╯︵ ┻━┻"),
-        ASCIIItem(id: "lenny",      name: "Lenny Face",  art: "( ͡° ͜ʖ ͡°)"),
-        ASCIIItem(id: "bear",       name: "Bear",        art: "ʕ•ᴥ•ʔ"),
-        ASCIIItem(id: "celebrate",  name: "Celebrate",   art: "٩(◕‿◕｡)۶"),
-    ]
+    private let featured: [ASCIIItem] = {
+        let ids = ["shrug", "flip", "lenny", "bear", "celebrate"]
+        let lookup = Dictionary(uniqueKeysWithValues: ASCIILibrary.builtInCategories.flatMap { $0.items }.map { ($0.id, $0) })
+        return ids.compactMap { lookup[$0] }
+    }()
 
     var body: some View {
         NavigationStack {
@@ -59,6 +57,7 @@ struct HomeView: View {
                                 .shadow(color: .black.opacity(0.3), radius: 8, x: 0, y: 4)
                         )
                 }
+                .accessibilityLabel("Create ASCII Art")
                 .padding(.trailing, 20)
                 .padding(.bottom, 20)
             }
@@ -286,17 +285,20 @@ struct ASCIIItemRow: View {
                     Image(systemName: favorites.isFavorite(item) ? "star.fill" : "star")
                         .foregroundColor(favorites.isFavorite(item) ? .yellow : .secondary)
                 }
+                .accessibilityLabel(favorites.isFavorite(item) ? "Remove from favorites" : "Add to favorites")
 
                 Button {
                     UIPasteboard.general.string = item.art
                     copied = true
-                    DispatchQueue.main.asyncAfter(deadline: .now() + 1.5) {
+                    Task {
+                        try? await Task.sleep(for: .seconds(1.5))
                         copied = false
                     }
                 } label: {
                     Image(systemName: copied ? "checkmark" : "doc.on.doc")
                         .foregroundColor(copied ? .green : .accentColor)
                 }
+                .accessibilityLabel(copied ? "Copied!" : "Copy to clipboard")
             }
         }
         .padding()

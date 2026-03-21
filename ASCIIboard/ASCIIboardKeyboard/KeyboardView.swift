@@ -154,9 +154,11 @@ struct KeyboardView: View {
                         isJustInserted: lastInsertedId == item.id,
                         isFavorite: favorites.isFavorite(item)
                     ) {
+                        UIImpactFeedbackGenerator(style: .light).impactOccurred()
                         lastInsertedId = item.id
                         onInsert(item.art)
-                        DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+                        Task {
+                            try? await Task.sleep(for: .seconds(0.5))
                             if lastInsertedId == item.id {
                                 lastInsertedId = nil
                             }
@@ -175,6 +177,7 @@ struct KeyboardView: View {
         HStack(spacing: 4) {
             if needsGlobeKey {
                 KeyboardToolbarButton(systemImage: "globe", action: onSwitchKeyboard)
+                    .accessibilityLabel("Switch keyboard")
             }
 
             KeyboardToolbarButton(
@@ -183,10 +186,12 @@ struct KeyboardView: View {
                 isSearching.toggle()
                 if !isSearching { searchText = "" }
             }
+            .accessibilityLabel(isSearching ? "Close search" : "Search")
 
             Spacer()
 
             KeyboardToolbarButton(systemImage: "delete.left", action: onDelete)
+                .accessibilityLabel("Delete")
         }
         .padding(.horizontal, 10)
         .frame(height: 44)
@@ -239,6 +244,8 @@ struct KeyboardItemButton: View {
         }
         .buttonStyle(.plain)
         .animation(.easeInOut(duration: 0.2), value: isJustInserted)
+        .accessibilityLabel("\(item.name): \(item.art)")
+        .accessibilityHint("Double-tap to insert")
     }
 }
 
