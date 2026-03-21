@@ -42,7 +42,9 @@ struct AboutView: View {
                 Section("Developer") {
                     Label("Zach Stedt", systemImage: "person.fill")
                     Button {
-                        UIApplication.shared.open(URL(string: "https://github.com/Zach-OP")!)
+                        if let url = URL(string: "https://github.com/Zach-OP") {
+                            UIApplication.shared.open(url)
+                        }
                     } label: {
                         Label("github.com/Zach-OP", systemImage: "link")
                     }

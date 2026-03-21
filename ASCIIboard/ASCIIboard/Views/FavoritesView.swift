@@ -13,6 +13,17 @@ struct FavoritesView: View {
         var id: Self { self }
     }
 
+    /// Map from item ID → category name, built once per render cycle.
+    private var categoryNameByID: [String: String] {
+        var map: [String: String] = [:]
+        for category in ASCIILibrary.categories {
+            for item in category.items {
+                map[item.id] = category.name
+            }
+        }
+        return map
+    }
+
     private var displayedItems: [ASCIIItem] {
         var items = favorites.favoriteItems
         if !searchText.isEmpty {
@@ -22,12 +33,10 @@ struct FavoritesView: View {
         switch sortOrder {
         case .dateAdded: return items.reversed()
         case .name:      return items.sorted { $0.name < $1.name }
-        case .category:  return items.sorted { categoryName(for: $0) < categoryName(for: $1) }
+        case .category:
+            let map = categoryNameByID
+            return items.sorted { (map[$0.id] ?? "Custom") < (map[$1.id] ?? "Custom") }
         }
-    }
-
-    private func categoryName(for item: ASCIIItem) -> String {
-        ASCIILibrary.categories.first(where: { $0.items.contains(item) })?.name ?? "Custom"
     }
 
     var body: some View {
